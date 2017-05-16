@@ -21,6 +21,14 @@ class Abb extends Game {
   }
   
 	public void paint(Graphics brush) {
+	Image background = null;
+	try {
+		background = ImageIO.read(new File("background.jpg"));
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	brush.drawImage(background, 0, 0, null);
     	brush.setColor(Color.black);
     	brush.fillRect(0,0,width,height);
     	
