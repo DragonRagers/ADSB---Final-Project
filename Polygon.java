@@ -1,5 +1,9 @@
 package net.mrpaul.MB190.finalProject;
 
+package adsb.finalproject.bdgub.bdcon;
+
+import java.awt.Graphics;
+
 /*
 CLASS: Polygon
 DESCRIPTION: A polygon is a sequence of points in space defined by a set of
@@ -37,6 +41,32 @@ class Polygon {
       p.x -= origin.x;
       p.y -= origin.y;
     }
+  }
+  
+  public void paint (Graphics brush){
+		int length = this.getPoints().length;
+		int[] xCoord = new int[length];
+		int[] yCoord = new int[length];
+		for(int i =0; i < length ; i++){
+			xCoord[i] = (int) this.getPoints()[i].x;
+			yCoord[i] = (int) this.getPoints()[i].y;
+		}
+		brush.fillPolygon(xCoord, yCoord, length);
+  }
+  
+  public void constrain(){
+	  if (position.x > 800){
+		  position.x = 800;
+	  }
+	  if (position.x < 0){
+		  position.x = 0;
+	  }
+	  if (position.y < 0){
+		  position.y =0;
+	  }
+	  if (position.y > 600){
+		  position.y = 600;
+	  }
   }
   
   // "getPoints" applies the rotation and offset to the shape of the polygon.
