@@ -57,18 +57,33 @@ public class Player extends Polygon implements KeyListener{
 		
 	}
 	public void move(){
-		if (forward){
+		if (forward && right) {
+			position.x+=stepSize * Math.sqrt(2) / 2;
+			position.y-=stepSize * Math.sqrt(2) / 2;
+		} 
+		else if (forward && left){
+			position.x-=stepSize * Math.sqrt(2) / 2;
+			position.y-=stepSize * Math.sqrt(2) / 2;
+		}
+		else if (down && left){
+			position.x-=stepSize * Math.sqrt(2) / 2;
+			position.y+=stepSize * Math.sqrt(2) / 2;
+		}
+		else if (down && right){
+			position.x+=stepSize * Math.sqrt(2) / 2;
+			position.y+=stepSize * Math.sqrt(2) / 2;
+		}
+		else if (forward){
 			position.y-=stepSize;
 		}
-		if (right){
+		else if (right){
 			position.x+=stepSize;
 		}
-		if (left){
+		else if (left){
 			position.x-=stepSize;
 		}
-		if(down){
+		else if(down){
 			position.y+=stepSize;
 		}
 	}
 }
-
