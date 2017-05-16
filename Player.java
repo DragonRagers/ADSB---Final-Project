@@ -19,16 +19,16 @@ public class Player extends Polygon implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		int keyCode = e.getKeyCode();
-		if(keyCode == KeyEvent.VK_UP){
+		if(keyCode == KeyEvent.VK_W){
 			forward = true;
 		}
-		if(keyCode == KeyEvent.VK_LEFT){
+		if(keyCode == KeyEvent.VK_A){
 			left= true;
 		}
-		if(keyCode == KeyEvent.VK_RIGHT){
+		if(keyCode == KeyEvent.VK_D){
 			right= true;
 		}
-		if(keyCode == KeyEvent.VK_DOWN){
+		if(keyCode == KeyEvent.VK_S){
 			down = true;
 		}
 	}
@@ -37,16 +37,16 @@ public class Player extends Polygon implements KeyListener{
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		int keyCode = e.getKeyCode();
-		if(keyCode == KeyEvent.VK_UP){
+		if(keyCode == KeyEvent.VK_W){
 			forward = false;
 		}
-		if(keyCode == KeyEvent.VK_LEFT){
+		if(keyCode == KeyEvent.VK_A){
 			left= false;
 		}
-		if(keyCode == KeyEvent.VK_RIGHT){
+		if(keyCode == KeyEvent.VK_D){
 			right= false;
 		}
-		if(keyCode == KeyEvent.VK_DOWN){
+		if(keyCode == KeyEvent.VK_S){
 			down = false;
 		}
 	}
