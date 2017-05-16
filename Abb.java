@@ -29,9 +29,7 @@ class Abb extends Game {
 		e.printStackTrace();
 	}
 	brush.drawImage(background, 0, 0, null);
-    	brush.setColor(Color.black);
-    	brush.fillRect(0,0,width,height);
-    	
+	
     	// sample code for printing message for debugging
     	// counter is incremented and this message printed
     	// each time the canvas is repainted
