@@ -9,7 +9,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 class Abb extends Game {
-	static int counter = 0;
 	private Point[] playerPoints = {
 			new Point(0,5),
 			new Point(5,5),
@@ -37,15 +36,7 @@ class Abb extends Game {
 
 	public void paint(Graphics brush) {		
 		brush.drawImage(background, 0, 0, null);
-
-
-		// sample code for printing message for debugging
-		// counter is incremented and this message printed
-		// each time the canvas is repainted
-		counter++;
-		brush.setColor(Color.white);
-		brush.drawString("Counter is " + counter,10,10);
-
+		
 		p.move();
 		p.constrain();
 		p.paint(brush);
