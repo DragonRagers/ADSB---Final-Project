@@ -16,12 +16,14 @@ class Abb extends Game {
 			new Point(5,0),
 			new Point(0,0)
 	};
-	private Player p = new Player(playerPoints, new Point(400,300), 180);
+	static int height = 720;
+	static int width = 1280;
+	private Player p = new Player(playerPoints, new Point(width/2, height/2), 180);
 	Image background;
 	
 	
 	public Abb() {
-		super("Abb",800,600);
+		super("Abb",width, height);
 		this.setFocusable(true);
 		this.requestFocus();
 		this.addKeyListener(p);
