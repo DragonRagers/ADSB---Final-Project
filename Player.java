@@ -9,11 +9,11 @@ public class Player extends Polygon implements KeyListener{
 	private boolean right= false;
 	private boolean left = false;	
 	private boolean down = false;
-	
+
 	public Player(Point[] inShape, Point inPosition, double inRotation){
 		super(inShape, inPosition, inRotation);
 	}
-	
+
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -54,7 +54,7 @@ public class Player extends Polygon implements KeyListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	public void move(){
 		if (forward && right) {
@@ -73,17 +73,18 @@ public class Player extends Polygon implements KeyListener{
 			position.x+=stepSize * Math.sqrt(2) / 2;
 			position.y+=stepSize * Math.sqrt(2) / 2;
 		}
-		else if (forward){
-			position.y-=stepSize;
-		}
-		else if (right){
-			position.x+=stepSize;
-		}
-		else if (left){
-			position.x-=stepSize;
-		}
-		else if(down){
-			position.y+=stepSize;
+		else {
+			if (forward)
+				position.y-=stepSize;
+			if (right)
+				position.x+=stepSize;
+
+			if (left)
+				position.x-=stepSize;
+
+			if (down)
+				position.y+=stepSize;
+
 		}
 	}
 }
