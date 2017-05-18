@@ -1,10 +1,11 @@
-package net.mrpaul.MB190.finalProject;
+package adsb.finalproject.bdgub.bdcon;
 
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -36,9 +37,14 @@ class Abb extends Game {
 
 	public void paint(Graphics brush) {		
 		brush.drawImage(background, 0, 0, null);
-		
 		p.move();
 		p.constrain();
+		p.shoot();
+		ArrayList<PlayerBullet> bullets = p.getBullets();
+		for(PlayerBullet b: bullets){
+			b.move();
+			b.paint(brush);
+		}
 		p.paint(brush);
 	}
 
