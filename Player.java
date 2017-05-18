@@ -20,7 +20,7 @@ public class Player extends Polygon implements KeyListener{
 	public Player(Point[] inShape, Point inPosition, double inRotation){
 		super(inShape, inPosition, inRotation);
 		try {
-			character = ImageIO.read(new File("backward.jpg"));
+			character = ImageIO.read(new File("down.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
