@@ -1,26 +1,34 @@
-package net.mrpaul.MB190.finalProject;
+package adsb.finalproject.bdgub.bdcon;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class Player extends Polygon implements KeyListener{
 	private int stepSize = 4;
-	private boolean forward= false;
+	//movement
+	private boolean up= false;
 	private boolean right= false;
 	private boolean left = false;	
 	private boolean down = false;
-
+	//shootie things
+	private boolean sUp = false;
+	private boolean sRight = false;
+	private boolean sLeft = false;
+	private boolean sDown = false;
+	ArrayList<PlayerBullet> bullets = new ArrayList<>();
+	
 	public Player(Point[] inShape, Point inPosition, double inRotation){
 		super(inShape, inPosition, inRotation);
 	}
-
+	
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		int keyCode = e.getKeyCode();
 		if(keyCode == KeyEvent.VK_W){
-			forward = true;
+			up = true;
 		}
 		if(keyCode == KeyEvent.VK_A){
 			left= true;
@@ -31,6 +39,19 @@ public class Player extends Polygon implements KeyListener{
 		if(keyCode == KeyEvent.VK_S){
 			down = true;
 		}
+		//shootah things
+		if(keyCode == KeyEvent.VK_UP){
+			sUp = true;
+		}
+		if(keyCode == KeyEvent.VK_DOWN){
+			sDown= true;
+		}
+		if(keyCode == KeyEvent.VK_LEFT){
+			sLeft = true;
+		}
+		if(keyCode == KeyEvent.VK_RIGHT){
+			sRight = true;
+		}
 	}
 
 	@Override
@@ -38,7 +59,7 @@ public class Player extends Polygon implements KeyListener{
 		// TODO Auto-generated method stub
 		int keyCode = e.getKeyCode();
 		if(keyCode == KeyEvent.VK_W){
-			forward = false;
+			up = false;
 		}
 		if(keyCode == KeyEvent.VK_A){
 			left= false;
@@ -49,19 +70,32 @@ public class Player extends Polygon implements KeyListener{
 		if(keyCode == KeyEvent.VK_S){
 			down = false;
 		}
+		//shootah things
+		if(keyCode == KeyEvent.VK_UP){
+			sUp = false;
+		}
+		if(keyCode == KeyEvent.VK_DOWN){
+			sDown= false;
+		}
+		if(keyCode == KeyEvent.VK_LEFT){
+			sLeft = false;
+		}
+		if(keyCode == KeyEvent.VK_RIGHT){
+			sRight = false;
+		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-
+		
 	}
 	public void move(){
-		if (forward && right) {
+		if (up && right) {
 			position.x+=stepSize * Math.sqrt(2) / 2;
 			position.y-=stepSize * Math.sqrt(2) / 2;
 		} 
-		else if (forward && left){
+		else if (up && left){
 			position.x-=stepSize * Math.sqrt(2) / 2;
 			position.y-=stepSize * Math.sqrt(2) / 2;
 		}
@@ -73,18 +107,26 @@ public class Player extends Polygon implements KeyListener{
 			position.x+=stepSize * Math.sqrt(2) / 2;
 			position.y+=stepSize * Math.sqrt(2) / 2;
 		}
-		else {
-			if (forward)
-				position.y-=stepSize;
-			if (right)
-				position.x+=stepSize;
-
-			if (left)
-				position.x-=stepSize;
-
-			if (down)
-				position.y+=stepSize;
-
+		else if (up){
+			position.y-=stepSize;
 		}
+		else if (right){
+			position.x+=stepSize;
+		}
+		else if (left){
+			position.x-=stepSize;
+		}
+		else if(down){
+			position.y+=stepSize;
+		}
+	}
+	
+	public void shoot(){
+		PlayerBullet b = new PlayerBullet(new Point(position.x, position.y),sLeft, sRight, sUp, sDown); 
+		bullets.add(b);
+	}
+	
+	public ArrayList<PlayerBullet> getBullets(){
+		return bullets;
 	}
 }
