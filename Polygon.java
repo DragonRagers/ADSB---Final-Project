@@ -1,7 +1,5 @@
 package net.mrpaul.MB190.finalProject;
 
-package adsb.finalproject.bdgub.bdcon;
-
 import java.awt.Graphics;
 
 /*
@@ -55,8 +53,8 @@ class Polygon {
   }
   
   public void constrain(){
-	  if (position.x > 800){
-		  position.x = 800;
+	  if (position.x > 1280){
+		  position.x = 1280;
 	  }
 	  if (position.x < 0){
 		  position.x = 0;
@@ -64,8 +62,8 @@ class Polygon {
 	  if (position.y < 0){
 		  position.y =0;
 	  }
-	  if (position.y > 600){
-		  position.y = 600;
+	  if (position.y > 720){
+		  position.y = 720;
 	  }
   }
   
