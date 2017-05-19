@@ -1,8 +1,13 @@
 package adsb.finalproject.bdgub.bdcon;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class Player extends Polygon implements KeyListener{
 	private int stepSize = 4;
@@ -17,9 +22,16 @@ public class Player extends Polygon implements KeyListener{
 	private boolean sLeft = false;
 	private boolean sDown = false;
 	ArrayList<PlayerBullet> bullets = new ArrayList<>();
+	private Image character;
 	
 	public Player(Point[] inShape, Point inPosition, double inRotation){
 		super(inShape, inPosition, inRotation);
+		try {
+			character = ImageIO.read(new File("down.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -29,15 +41,31 @@ public class Player extends Polygon implements KeyListener{
 		int keyCode = e.getKeyCode();
 		if(keyCode == KeyEvent.VK_W){
 			up = true;
+			try {
+				character = ImageIO.read(new File("up.png"));
+			} catch (IOException e1) {
+			}
 		}
 		if(keyCode == KeyEvent.VK_A){
 			left= true;
+			try {
+				character = ImageIO.read(new File("left.png"));
+			} catch (IOException e1) {
+			}
 		}
 		if(keyCode == KeyEvent.VK_D){
 			right= true;
+			try {
+				character = ImageIO.read(new File("right.png"));
+			} catch (IOException e1) {
+			}
 		}
 		if(keyCode == KeyEvent.VK_S){
 			down = true;
+			try {
+				character = ImageIO.read(new File("down.png"));
+			} catch (IOException e1) {
+			}
 		}
 		//shootah things
 		if(keyCode == KeyEvent.VK_UP){
@@ -57,7 +85,7 @@ public class Player extends Polygon implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		int keyCode = e.getKeyCode();
+		int keyCode = e.getKeyCode();F
 		if(keyCode == KeyEvent.VK_W){
 			up = false;
 		}
@@ -129,4 +157,8 @@ public class Player extends Polygon implements KeyListener{
 	public ArrayList<PlayerBullet> getBullets(){
 		return bullets;
 	}
+	
+	public void paint (Graphics brush){
+		brush.drawImage(character, (int) position.x, (int) position.y, 100, 100, null);
+  }
 }
