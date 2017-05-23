@@ -36,7 +36,7 @@ class Abb extends Game {
 	}
 
 	public void paint(Graphics brush) {		
-		brush.drawImage(background, 0, 0, null);
+		brush.drawImage(background, 0, 0, 1280, 720, null);
 		p.move();
 		p.paint(brush);
 		p.shoot();

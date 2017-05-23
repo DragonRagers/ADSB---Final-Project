@@ -37,35 +37,19 @@ public class Player extends Polygon implements KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+
 		int keyCode = e.getKeyCode();
 		if(keyCode == KeyEvent.VK_W){
 			up = true;
-			try {
-				character = ImageIO.read(new File("up.png"));
-			} catch (IOException e1) {
-			}
 		}
 		if(keyCode == KeyEvent.VK_A){
 			left= true;
-			try {
-				character = ImageIO.read(new File("left.png"));
-			} catch (IOException e1) {
-			}
 		}
 		if(keyCode == KeyEvent.VK_D){
 			right= true;
-			try {
-				character = ImageIO.read(new File("right.png"));
-			} catch (IOException e1) {
-			}
 		}
 		if(keyCode == KeyEvent.VK_S){
 			down = true;
-			try {
-				character = ImageIO.read(new File("down.png"));
-			} catch (IOException e1) {
-			}
 		}
 		//shootah things
 		if(keyCode == KeyEvent.VK_UP){
@@ -154,6 +138,48 @@ public class Player extends Polygon implements KeyListener{
 		if (sLeft || sRight || sUp || sDown) {
 			PlayerBullet b = new PlayerBullet(new Point(position.x, position.y),sLeft, sRight, sUp, sDown); 
 			bullets.add(b);
+		}
+		if (sLeft) {
+			try {
+				character = ImageIO.read(new File("left.png"));
+			} catch (IOException e1) {
+			}
+		} else if (sRight) {
+			try {
+				character = ImageIO.read(new File("right.png"));
+			} catch (IOException e1) {
+			}
+		} else if (sUp) {
+			try {
+				character = ImageIO.read(new File("up.png"));
+			} catch (IOException e1) {
+			}
+		} else if (sDown) {
+			try {
+				character = ImageIO.read(new File("down.png"));
+			} catch (IOException e1) {
+			}
+		}		
+		else if (left) {
+			try {
+				character = ImageIO.read(new File("left.png"));
+			} catch (IOException e1) {
+			}
+		} else if (right) {
+			try {
+				character = ImageIO.read(new File("right.png"));
+			} catch (IOException e1) {
+			}
+		} else if (up) {
+			try {
+				character = ImageIO.read(new File("up.png"));
+			} catch (IOException e1) {
+			}
+		} else if (down) {
+			try {
+				character = ImageIO.read(new File("down.png"));
+			} catch (IOException e1) {
+			}
 		}
 	}
 
