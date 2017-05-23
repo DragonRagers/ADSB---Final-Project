@@ -1,4 +1,4 @@
-package adsb.finalproject.bdgub.bdcon;
+package net.mrpaul.MB190.finalProject;
 
 
 import java.awt.*;
@@ -28,7 +28,7 @@ class Abb extends Game {
 		this.requestFocus();
 		this.addKeyListener(p);
 		try {
-			background = ImageIO.read(new File("background.jpg"));
+			background = ImageIO.read(new File("background.gif"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,16 +36,16 @@ class Abb extends Game {
 	}
 
 	public void paint(Graphics brush) {		
-		brush.drawImage(background, 0, 0, null);
+		brush.drawImage(background, 0, 0, 1280, 720, null);
 		p.move();
-		p.constrain();
+		p.paint(brush);
 		p.shoot();
 		ArrayList<PlayerBullet> bullets = p.getBullets();
 		for(PlayerBullet b: bullets){
 			b.move();
 			b.paint(brush);
 		}
-		p.paint(brush);
+		
 	}
 
 	public static void main (String[] args) {

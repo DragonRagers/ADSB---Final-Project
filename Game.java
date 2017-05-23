@@ -45,5 +45,6 @@ abstract class Game extends Canvas {
   // 'sleep' is a simple helper function used in 'update'.
   private void sleep(int time) {
     try {Thread.sleep(time);} catch(Exception exc){};
+    
   }
 }

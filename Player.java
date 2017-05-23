@@ -1,4 +1,4 @@
-package adsb.finalproject.bdgub.bdcon;
+package net.mrpaul.MB190.finalProject;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -23,7 +23,7 @@ public class Player extends Polygon implements KeyListener{
 	private boolean sDown = false;
 	ArrayList<PlayerBullet> bullets = new ArrayList<>();
 	private Image character;
-	
+
 	public Player(Point[] inShape, Point inPosition, double inRotation){
 		super(inShape, inPosition, inRotation);
 		try {
@@ -33,39 +33,23 @@ public class Player extends Polygon implements KeyListener{
 			e.printStackTrace();
 		}
 	}
-	
+
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+
 		int keyCode = e.getKeyCode();
 		if(keyCode == KeyEvent.VK_W){
 			up = true;
-			try {
-				character = ImageIO.read(new File("up.png"));
-			} catch (IOException e1) {
-			}
 		}
 		if(keyCode == KeyEvent.VK_A){
 			left= true;
-			try {
-				character = ImageIO.read(new File("left.png"));
-			} catch (IOException e1) {
-			}
 		}
 		if(keyCode == KeyEvent.VK_D){
 			right= true;
-			try {
-				character = ImageIO.read(new File("right.png"));
-			} catch (IOException e1) {
-			}
 		}
 		if(keyCode == KeyEvent.VK_S){
 			down = true;
-			try {
-				character = ImageIO.read(new File("down.png"));
-			} catch (IOException e1) {
-			}
 		}
 		//shootah things
 		if(keyCode == KeyEvent.VK_UP){
@@ -85,7 +69,7 @@ public class Player extends Polygon implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		int keyCode = e.getKeyCode();F
+		int keyCode = e.getKeyCode();
 		if(keyCode == KeyEvent.VK_W){
 			up = false;
 		}
@@ -116,7 +100,7 @@ public class Player extends Polygon implements KeyListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	public void move(){
 		if (up && right) {
@@ -147,18 +131,63 @@ public class Player extends Polygon implements KeyListener{
 		else if(down){
 			position.y+=stepSize;
 		}
+		constrain();
 	}
-	
+
 	public void shoot(){
-		PlayerBullet b = new PlayerBullet(new Point(position.x, position.y),sLeft, sRight, sUp, sDown); 
-		bullets.add(b);
+		if (sLeft || sRight || sUp || sDown) {
+			PlayerBullet b = new PlayerBullet(new Point(position.x, position.y),sLeft, sRight, sUp, sDown); 
+			bullets.add(b);
+		}
+		if (sLeft) {
+			try {
+				character = ImageIO.read(new File("left.png"));
+			} catch (IOException e1) {
+			}
+		} else if (sRight) {
+			try {
+				character = ImageIO.read(new File("right.png"));
+			} catch (IOException e1) {
+			}
+		} else if (sUp) {
+			try {
+				character = ImageIO.read(new File("up.png"));
+			} catch (IOException e1) {
+			}
+		} else if (sDown) {
+			try {
+				character = ImageIO.read(new File("down.png"));
+			} catch (IOException e1) {
+			}
+		}		
+		else if (left) {
+			try {
+				character = ImageIO.read(new File("left.png"));
+			} catch (IOException e1) {
+			}
+		} else if (right) {
+			try {
+				character = ImageIO.read(new File("right.png"));
+			} catch (IOException e1) {
+			}
+		} else if (up) {
+			try {
+				character = ImageIO.read(new File("up.png"));
+			} catch (IOException e1) {
+			}
+		} else if (down) {
+			try {
+				character = ImageIO.read(new File("down.png"));
+			} catch (IOException e1) {
+			}
+		}
 	}
-	
+
 	public ArrayList<PlayerBullet> getBullets(){
 		return bullets;
 	}
-	
+
 	public void paint (Graphics brush){
-		brush.drawImage(character, (int) position.x, (int) position.y, 100, 100, null);
-  }
+		brush.drawImage(character, (int) position.x - 50, (int) position.y - 50, 100, 100, null);
+	}
 }
