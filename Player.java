@@ -188,6 +188,6 @@ public class Player extends Polygon implements KeyListener{
 	}
 
 	public void paint (Graphics brush){
-		brush.drawImage(character, (int) position.x - 50, (int) position.y - 50, 100, 100, null);
+		brush.drawImage(character, (int) position.x - 25, (int) position.y - 25, 50, 50, null);
 	}
 }
