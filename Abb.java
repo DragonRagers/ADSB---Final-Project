@@ -22,9 +22,11 @@ class Abb extends Game {
 	static int counter = 0;
 	Image background;
 	ArrayList<PlayerBullet> bullets;
+	boolean canShoot;
+	int bulletTimer;
 	
 	//things
-	static int attackspeed = 12;
+	static int attackspeed = 20;
 	
 
 	public Abb() {
@@ -39,14 +41,28 @@ class Abb extends Game {
 			e.printStackTrace();
 		}
 		bullets = p.getBullets();
+		canShoot = true;
+		bulletTimer = 0;
 	}
 
 	public void paint(Graphics brush) {		
 		brush.drawImage(background, 0, 0, 1280, 720, null);
+		
+		//player
 		p.move();
 		p.paint(brush);
-		if (counter % attackspeed == 0) {
-			p.shoot();
+		
+		//bullets
+		if (canShoot) {
+			if (p.shoot()) {
+				canShoot = false;
+				bulletTimer = 0;
+			}
+		}
+		if (bulletTimer < attackspeed) {
+			bulletTimer++;
+		} else {
+			canShoot = true;
 		}
 		for(int c = 0; c < bullets.size(); c++){
 			PlayerBullet b = bullets.get(c);
