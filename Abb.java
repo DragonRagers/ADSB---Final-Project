@@ -86,11 +86,13 @@ class Abb extends Game {
 		}
 		
 		//number display
-		brush.setColor(Color.WHITE);
+		brush.setColor(Color.BLACK);
 		brush.drawString("Counter: " + counter, 10, 40);
 		brush.drawString("Bullets: " + bullets.size(), 10, 55);
 		brush.drawString("BulletTimer: " + bulletTimer, 10, 70);
 		//health bar
+		brush.setColor(Color.GRAY);
+		brush.fillRect(10, 10, 180, 15);
 		brush.setColor(Color.RED);
 		brush.fillRect(10, 10, p.getHealth()*30, 15);
 		
