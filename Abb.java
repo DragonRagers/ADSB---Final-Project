@@ -79,10 +79,21 @@ class Abb extends Game {
 			}
 		}
 		
+		//game over?
+		if (p.getHealth() <= 0) {
+			brush.setColor(Color.RED);
+			brush.drawString("Ay its game over noob", width/2 - 50, height/2);
+		}
+		
 		//number display
-		brush.drawString("Counter: " + counter, 10, 10);
-		brush.drawString("Bullets: " + bullets.size(), 10, 25);
-		brush.drawString("BulletTimer: " + bulletTimer, 10, 40);
+		brush.setColor(Color.WHITE);
+		brush.drawString("Counter: " + counter, 10, 40);
+		brush.drawString("Bullets: " + bullets.size(), 10, 55);
+		brush.drawString("BulletTimer: " + bulletTimer, 10, 70);
+		//health bar
+		brush.setColor(Color.RED);
+		brush.fillRect(10, 10, p.getHealth()*30, 15);
+		
 		counter++;
 
 	}
