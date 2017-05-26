@@ -16,36 +16,42 @@ class Abb extends Game {
 			new Point(5,0),
 			new Point(0,0)
 	};
-	static int height = 720;
-	static int width = 1280;
+	private static final int height = 720;
+	private static final int width = 1280;
 	private Player p = new Player(playerPoints, new Point(width/2, height/2), 180);
-	static int counter = 0;
-	Image background;
-	ArrayList<PlayerBullet> bullets;
-	boolean canShoot;
-	int bulletTimer;
+	private static int counter = 0;
+	private Image background;
+	private ArrayList<PlayerBullet> bullets;
+	private boolean canShoot;
+	private int bulletTimer;
 	
-	//things
-	static int attackspeed = 20;
+	//changeable things
+	static final int attackspeed = 20;
 	
 
 	public Abb() {
+		//construct things
 		super("Abb",width, height);
 		this.setFocusable(true);
 		this.requestFocus();
 		this.addKeyListener(p);
+		
+		//loads background
 		try {
 			background = ImageIO.read(new File("background.gif"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//preps bullet variables
 		bullets = p.getBullets();
 		canShoot = true;
 		bulletTimer = 0;
 	}
 
 	public void paint(Graphics brush) {		
+		//background
 		brush.drawImage(background, 0, 0, 1280, 720, null);
 		
 		//player
@@ -73,8 +79,10 @@ class Abb extends Game {
 			}
 		}
 		
+		//number display
 		brush.drawString("Counter: " + counter, 10, 10);
 		brush.drawString("Bullets: " + bullets.size(), 10, 25);
+		brush.drawString("BulletTimer: " + bulletTimer, 10, 40);
 		counter++;
 
 	}
