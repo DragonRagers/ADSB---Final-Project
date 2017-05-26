@@ -12,9 +12,9 @@ public class PlayerBullet extends Player{
 	
 	static Point[] bulletShape = {
 			new Point(0,0),
-			new Point(3,0),
-			new Point(3,3),
-			new Point(0,3)
+			new Point(5,0),
+			new Point(5,5),
+			new Point(0,5)
 	};
 
 	public PlayerBullet(Point pos, boolean sLeft, boolean sRight, boolean sUp, boolean sDown) {
@@ -66,6 +66,9 @@ public class PlayerBullet extends Player{
 		brush.fillPolygon(xCoord, yCoord, length);
   }
   
+	public boolean isOutside() {
+		return position.x < 0 || position.x > 1280 || position.y < 0 || position.y > 720;
+	}
 	
 }
 
