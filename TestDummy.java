@@ -9,12 +9,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class TestDummy extends Polygon implements Enemy{
-	private int health = 100;
+	private int health = 999;
 	private static Point[] hitBox = {new Point(-40,-40),
 			new Point(-40, 40),
 			new Point(40,40),
 			new Point(40, -40)};
 	private Image dummy;
+	
 	public TestDummy(Point inPosition, double inRotation) {
 		super(hitBox, inPosition, inRotation);
 		try {
@@ -32,12 +33,12 @@ public class TestDummy extends Polygon implements Enemy{
 
 	}
 
-	public void move() {}
+	public void move(Point PlayerPoint) {}
 
 	public void attack() {}
 
 	public void hit(int dmg) {
-		//health--;
+		health--;
 	}
 
 	public int getHealth() {return health;}

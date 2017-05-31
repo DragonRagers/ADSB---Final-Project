@@ -51,6 +51,7 @@ class Abb extends Game {
 		bulletTimer = 0;
 		enemies = new ArrayList<Enemy>();
 		enemies.add(new TestDummy(new Point(width/2, height/2), 0));
+		enemies.add(new MrGuy(new Point(width/2, height/2), 0));
 	}
 
 	public void level() {
@@ -91,7 +92,7 @@ class Abb extends Game {
 		//enemy draw move
 		brush.setColor(Color.RED);
 		for (Enemy e: enemies) {
-			e.move();
+			e.move(p.position);
 			e.attack();
 			e.paint(brush);
 		}
