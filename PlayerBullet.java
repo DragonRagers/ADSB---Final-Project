@@ -7,14 +7,13 @@ public class PlayerBullet extends Player{
 	private boolean dRight = false;
 	private boolean dUp = false;
 	private boolean dDown = false;
-	private Point pos;
 	private int stepSize = 6;
 	
 	static Point[] bulletShape = {
 			new Point(0,0),
-			new Point(5,0),
-			new Point(5,5),
-			new Point(0,5)
+			new Point(7,0),
+			new Point(7,7),
+			new Point(0,7)
 	};
 
 	public PlayerBullet(Point pos, boolean sLeft, boolean sRight, boolean sUp, boolean sDown) {
@@ -68,6 +67,10 @@ public class PlayerBullet extends Player{
   
 	public boolean isOutside() {
 		return position.x < 0 || position.x > 1280 || position.y < 0 || position.y > 720;
+	}
+	
+	public Point position() {
+		return position;
 	}
 	
 }

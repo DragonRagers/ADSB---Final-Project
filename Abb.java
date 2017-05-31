@@ -24,10 +24,11 @@ class Abb extends Game {
 	private ArrayList<PlayerBullet> bullets;
 	private boolean canShoot;
 	private int bulletTimer;
-	
+	private ArrayList<Enemy> enemies;
+
 	//changeable things
-	static final int attackspeed = 20;
-	
+	static final int attackspeed = 10;
+	static int bulletDmg = 10;
 
 	public Abb() {
 		//construct things
@@ -35,7 +36,7 @@ class Abb extends Game {
 		this.setFocusable(true);
 		this.requestFocus();
 		this.addKeyListener(p);
-		
+
 		//loads background
 		try {
 			background = ImageIO.read(new File("background.gif"));
@@ -43,21 +44,28 @@ class Abb extends Game {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//preps bullet variables
+
+		//preps variables
 		bullets = p.getBullets();
 		canShoot = true;
 		bulletTimer = 0;
+		enemies = new ArrayList<Enemy>();
+		enemies.add(new TestDummy(new Point(width/2, height/2), 0));
 	}
+
+	public void level() {
+
+	}
+
 
 	public void paint(Graphics brush) {		
 		//background
 		brush.drawImage(background, 0, 0, 1280, 720, null);
-		
+
 		//player
 		p.move();
 		p.paint(brush);
-		
+
 		//bullets
 		if (canShoot) {
 			if (p.shoot()) {
@@ -70,6 +78,7 @@ class Abb extends Game {
 		} else {
 			canShoot = true;
 		}
+		brush.setColor(Color.GREEN);
 		for(int c = 0; c < bullets.size(); c++){
 			PlayerBullet b = bullets.get(c);
 			b.move();
@@ -78,13 +87,35 @@ class Abb extends Game {
 				bullets.remove(c);
 			}
 		}
+
+		//enemy draw move
+		brush.setColor(Color.RED);
+		for (Enemy e: enemies) {
+			e.move();
+			e.attack();
+			e.paint(brush);
+		}
 		
+		//enemy hit detection
+		brush.setColor(Color.RED);
+		for (int b = 0; b < bullets.size(); b++) {
+			for (int e = 0; e < enemies.size(); e++) {
+				if (enemies.get(e).contains(bullets.get(b).position())) {
+					bullets.remove(b);
+					enemies.get(e).hit(bulletDmg);
+					if (enemies.get(e).getHealth() <= 0) {
+						enemies.remove(e);
+					}
+				}
+			}
+		}
+
 		//game over?
 		if (p.getHealth() <= 0) {
 			brush.setColor(Color.RED);
 			brush.drawString("Ay its game over noob", width/2 - 50, height/2);
 		}
-		
+
 		//number display
 		brush.setColor(Color.BLACK);
 		brush.drawString("Counter: " + counter, 10, 40);
@@ -95,7 +126,7 @@ class Abb extends Game {
 		brush.fillRect(10, 10, 180, 15);
 		brush.setColor(Color.RED);
 		brush.fillRect(10, 10, p.getHealth()*30, 15);
-		
+
 		counter++;
 
 	}
