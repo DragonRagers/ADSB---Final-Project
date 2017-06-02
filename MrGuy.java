@@ -15,12 +15,12 @@ public class MrGuy extends Polygon implements Enemy {
 			new Point(40, -40)};
 	private Image guy;
 	
-	private int moveSpeed = 1;
+	private int moveSpeed = 0;
 	
 	public MrGuy(Point inPosition, double inRotation) {
 		super(hitBox, inPosition, inRotation);
 		try {
-			guy = ImageIO.read(new File("up.png"));
+			guy = ImageIO.read(new File("guyLeft.png"));
 		} catch (IOException e) {
 		}
 	}
@@ -28,16 +28,18 @@ public class MrGuy extends Polygon implements Enemy {
 	
 
 	public void paint(Graphics brush) {
-		brush.drawImage(guy, (int) position.x - 25, (int) position.y - 25, 100, 100, null);
+		brush.drawImage(guy, (int) position.x - 25, (int) position.y - 25, 50, 50, null);
 		//brush.drawRect((int) position.x - 25, (int) position.y - 25, 80, 80);
-		brush.drawString("HP: " + health, (int) position.x - 10, (int) position.y - 30);
-		brush.drawString("MrGuy", (int) position.x - 25, (int) position.y - 45);
+		brush.drawString("HP: " + health, (int) position.x - 20, (int) position.y - 30);
+		brush.drawString("MrGuy", (int) position.x - 20, (int) position.y - 45);
 
 	}
 	
 	public void move(Point PlayerPoint) {
 		double angle = Math.atan2(PlayerPoint.y - position.y, PlayerPoint.x - position.x);
-		//System.out.println(angle);
+		angle = angle - angle % (Math.PI/4);
+		//System.out.println(Math.toDegrees(angle));
+		
 		position.y += Math.sin(angle) * moveSpeed;
 		position.x += Math.cos(angle) * moveSpeed;
 	}

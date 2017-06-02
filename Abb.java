@@ -50,7 +50,7 @@ class Abb extends Game {
 		canShoot = true;
 		bulletTimer = 0;
 		enemies = new ArrayList<Enemy>();
-		enemies.add(new TestDummy(new Point(width/2, height/2), 0));
+		//enemies.add(new TestDummy(new Point(width/2, height/2), 0));
 		enemies.add(new MrGuy(new Point(width/2, height/2), 0));
 	}
 
