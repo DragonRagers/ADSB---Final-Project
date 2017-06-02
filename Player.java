@@ -22,6 +22,8 @@ public class Player extends Polygon implements KeyListener{
 	private boolean sLeft = false;
 	private boolean sDown = false;
 	ArrayList<PlayerBullet> bullets = new ArrayList<>();
+
+	private int health = 6;
 	private Image character;
 
 	public Player(Point[] inShape, Point inPosition, double inRotation){
@@ -37,8 +39,13 @@ public class Player extends Polygon implements KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-
 		int keyCode = e.getKeyCode();
+		
+		if (keyCode == KeyEvent.VK_L) {
+			health--;
+		}
+		
+		
 		if(keyCode == KeyEvent.VK_W){
 			up = true;
 		}
@@ -134,11 +141,7 @@ public class Player extends Polygon implements KeyListener{
 		constrain();
 	}
 
-	public void shoot(){
-		if (sLeft || sRight || sUp || sDown) {
-			PlayerBullet b = new PlayerBullet(new Point(position.x, position.y),sLeft, sRight, sUp, sDown); 
-			bullets.add(b);
-		}
+	public boolean shoot(){
 		if (sLeft) {
 			try {
 				character = ImageIO.read(new File("left.png"));
@@ -181,6 +184,12 @@ public class Player extends Polygon implements KeyListener{
 			} catch (IOException e1) {
 			}
 		}
+		if (sLeft || sRight || sUp || sDown) {
+			PlayerBullet b = new PlayerBullet(new Point(position.x, position.y),sLeft, sRight, sUp, sDown); 
+			bullets.add(b);
+			return true;
+		}
+		return false;
 	}
 
 	public ArrayList<PlayerBullet> getBullets(){
@@ -188,6 +197,10 @@ public class Player extends Polygon implements KeyListener{
 	}
 
 	public void paint (Graphics brush){
-		brush.drawImage(character, (int) position.x - 25, (int) position.y - 25, 50, 50, null);
+		brush.drawImage(character, (int) position.x - 50, (int) position.y - 50, 100, 100, null);
+	}
+
+	public int getHealth() {
+		return health;
 	}
 }
