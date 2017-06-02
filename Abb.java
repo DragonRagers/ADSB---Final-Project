@@ -11,21 +11,19 @@ import javax.imageio.ImageIO;
 
 class Abb extends Game {
 	private Point[] playerPoints = {
-			new Point(0,5),
-			new Point(5,5),
-			new Point(5,0),
-			new Point(0,0)
+			//PLAYER HITBOX HERE
 	};
+	
 	private static final int height = 720;
 	private static final int width = 1280;
-	private Player p = new Player(playerPoints, new Point(width/2, height/2), 180);
+	private Player p = new Player(playerPoints, new Point(100, 100), 180);
 	private static int counter = 0;
 	private Image background;
 	private ArrayList<PlayerBullet> bullets;
 	private boolean canShoot;
 	private int bulletTimer;
 	private ArrayList<Enemy> enemies;
-
+	
 	//changeable things
 	static final int attackspeed = 10;
 	static int bulletDmg = 10;
@@ -49,9 +47,11 @@ class Abb extends Game {
 		bullets = p.getBullets();
 		canShoot = true;
 		bulletTimer = 0;
+		
+		//enemy testing
 		enemies = new ArrayList<Enemy>();
 		//enemies.add(new TestDummy(new Point(width/2, height/2), 0));
-		enemies.add(new MrGuy(new Point(width/2, height/2), 0));
+		enemies.add(new MrGuy(new Point(width - 100, height - 100), 0));
 	}
 
 	public void level() {
@@ -92,8 +92,8 @@ class Abb extends Game {
 		//enemy draw move
 		brush.setColor(Color.RED);
 		for (Enemy e: enemies) {
+			e.attack(p.position);
 			e.move(p.position);
-			e.attack();
 			e.paint(brush);
 		}
 		
@@ -110,7 +110,10 @@ class Abb extends Game {
 				}
 			}
 		}
-
+		
+		//player hit detections
+		
+		
 		//game over?
 		if (p.getHealth() <= 0) {
 			brush.setColor(Color.RED);

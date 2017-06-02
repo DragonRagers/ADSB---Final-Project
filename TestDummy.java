@@ -35,7 +35,7 @@ public class TestDummy extends Polygon implements Enemy{
 
 	public void move(Point PlayerPoint) {}
 
-	public void attack() {}
+	public void attack(Point PlayerPoint) {}
 
 	public void hit(int dmg) {
 		health--;

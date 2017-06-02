@@ -8,43 +8,82 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class MrGuy extends Polygon implements Enemy {
-	private int health = 50;
 	private static Point[] hitBox = {new Point(-40,-40),
-			new Point(-40, 40),
-			new Point(40,40),
-			new Point(40, -40)};
+			new Point(-20, 20),
+			new Point(20,20),
+			new Point(20, -20)};
 	private Image guy;
+	private int charge = 0;
+	private double angle;
 	
-	private int moveSpeed = 0;
-	
+	private int health = 500;
+	private int moveSpeed = 2;
+
 	public MrGuy(Point inPosition, double inRotation) {
 		super(hitBox, inPosition, inRotation);
 		try {
 			guy = ImageIO.read(new File("guyLeft.png"));
 		} catch (IOException e) {
 		}
+		angle = 0;
 	}
 
-	
+
 
 	public void paint(Graphics brush) {
-		brush.drawImage(guy, (int) position.x - 25, (int) position.y - 25, 50, 50, null);
-		//brush.drawRect((int) position.x - 25, (int) position.y - 25, 80, 80);
-		brush.drawString("HP: " + health, (int) position.x - 20, (int) position.y - 30);
-		brush.drawString("MrGuy", (int) position.x - 20, (int) position.y - 45);
-
+		brush.drawImage(guy, (int) position.x - 10, (int) position.y - 10, 50, 50, null);
+		brush.drawString("HP: " + health, (int) position.x - 10, (int) position.y - 15);
+		brush.drawString("MrGuy", (int) position.x - 5, (int) position.y - 30);
+		//brush.draw3DRect((int) position.x - 5, (int) position.y - 5, 60, 60);
 	}
-	
+
 	public void move(Point PlayerPoint) {
-		double angle = Math.atan2(PlayerPoint.y - position.y, PlayerPoint.x - position.x);
-		angle = angle - angle % (Math.PI/4);
+		System.out.println(charge);
+		if (moveSpeed == 2) {
+			angle = Math.atan2(PlayerPoint.y - position.y, PlayerPoint.x - position.x);
+		}
+		if (angle < -7 * Math.PI / 8) {
+			angle = -Math.PI;
+		} else if (angle < -5 * Math.PI / 8) {
+			angle = -3 * Math.PI / 4;
+		} else if (angle < -3 * Math.PI / 8) {
+			angle = -Math.PI / 2;
+		} else if (angle < -1 * Math.PI / 8) {
+			angle = -Math.PI / 4;
+		} else if (angle < 1 * Math.PI / 8) {
+			angle = 0;
+		} else if (angle < 3 * Math.PI / 8) {
+			angle = Math.PI / 4;
+		} else if (angle < 5 * Math.PI / 8) {
+			angle = Math.PI / 2;
+		} else if (angle < 7 * Math.PI / 8) {
+			angle = 3 * Math.PI / 4;
+		} else {
+			angle = Math.PI;
+		}
+
 		//System.out.println(Math.toDegrees(angle));
-		
+
 		position.y += Math.sin(angle) * moveSpeed;
 		position.x += Math.cos(angle) * moveSpeed;
 	}
 
-	public void attack() {}
+	public void attack(Point PlayerPoint) {
+		double distance = Math.sqrt(Math.pow(PlayerPoint.x - position.x, 2) + Math.pow(PlayerPoint.y - position.y, 2));
+		if (distance <= 200 && charge == 0) {
+			moveSpeed = 7;
+			charge++;
+		}
+		if (charge > 0) {
+			charge++;
+		}
+		if (charge == 40) {
+			moveSpeed = 2;
+		}
+		if (charge == 100) {
+			charge = 0;
+		}
+	}
 
 	public void hit(int dmg) {
 		health -= dmg;
