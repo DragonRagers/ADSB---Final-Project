@@ -15,6 +15,7 @@ public class MrGuy extends Polygon implements Enemy {
 	private Image guy;
 	private int charge = 0;
 	private double angle;
+	private int attack = 0;
 	
 	private int health = 500;
 	private int moveSpeed = 2;
@@ -43,7 +44,6 @@ public class MrGuy extends Polygon implements Enemy {
 			angle = Math.atan2(PlayerPoint.y - position.y, PlayerPoint.x - position.x);
 		}
 		if (angle < -7 * Math.PI / 8) {
-			angle = -Math.PI;
 		} else if (angle < -5 * Math.PI / 8) {
 			angle = -3 * Math.PI / 4;
 		} else if (angle < -3 * Math.PI / 8) {
@@ -61,6 +61,17 @@ public class MrGuy extends Polygon implements Enemy {
 		} else {
 			angle = Math.PI;
 		}
+		if (angle > -Math.PI && angle < -Math.PI/2 || angle < Math.PI && angle > Math.PI/2) {
+			try {
+				guy = ImageIO.read(new File("guyLeft.png"));
+			} catch (IOException e) {
+			}
+		} else {
+			try {
+				guy = ImageIO.read(new File("guyRight.png"));
+			} catch (IOException e) {
+			}
+		}
 
 		//System.out.println(Math.toDegrees(angle));
 
@@ -68,8 +79,8 @@ public class MrGuy extends Polygon implements Enemy {
 		position.x += Math.cos(angle) * moveSpeed;
 	}
 
-	public void attack(Point PlayerPoint) {
-		double distance = Math.sqrt(Math.pow(PlayerPoint.x - position.x, 2) + Math.pow(PlayerPoint.y - position.y, 2));
+	public void attack(Player p, Graphics brush) {
+		double distance = Math.sqrt(Math.pow(p.position.x - position.x, 2) + Math.pow(p.position.y - position.y, 2));
 		if (distance <= 200 && charge == 0) {
 			moveSpeed = 7;
 			charge++;
@@ -82,6 +93,17 @@ public class MrGuy extends Polygon implements Enemy {
 		}
 		if (charge == 100) {
 			charge = 0;
+		}
+		
+		if (attack == 0 && p.contains(position)) {
+			p.damage(1);
+			attack = 1;
+		}
+		if (attack > 0) {
+			attack++;
+		}
+		if (attack == 30) {
+			attack = 0;
 		}
 	}
 

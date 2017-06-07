@@ -10,7 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Player extends Polygon implements KeyListener{
-	private int stepSize = 4;
+	private int stepSize = 6;
 	//movement
 	private boolean up= false;
 	private boolean right= false;
@@ -185,7 +185,7 @@ public class Player extends Polygon implements KeyListener{
 			}
 		}
 		if (sLeft || sRight || sUp || sDown) {
-			PlayerBullet b = new PlayerBullet(new Point(position.x, position.y),sLeft, sRight, sUp, sDown); 
+			PlayerBullet b = new PlayerBullet(new Point(position.x, position.y + 15),sLeft, sRight, sUp, sDown); 
 			bullets.add(b);
 			return true;
 		}
@@ -197,9 +197,13 @@ public class Player extends Polygon implements KeyListener{
 	}
 
 	public void paint (Graphics brush){
-		brush.drawImage(character, (int) position.x - 50, (int) position.y - 50, 100, 100, null);
+		brush.drawImage(character, (int) position.x - 20, (int) position.y - 25, 100, 100, null);
 	}
 
+	public void damage(int dmg) {
+		health -= dmg;
+	}
+	
 	public int getHealth() {
 		return health;
 	}

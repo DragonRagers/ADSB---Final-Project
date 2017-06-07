@@ -11,13 +11,16 @@ import javax.imageio.ImageIO;
 
 class Abb extends Game {
 	private Point[] playerPoints = {
-			//PLAYER HITBOX HERE
+			new Point(-40,-40),
+			new Point(-40, 40),
+			new Point(40,40),
+			new Point(40, -40)
 	};
 	
 	private static final int height = 720;
 	private static final int width = 1280;
 	private Player p = new Player(playerPoints, new Point(100, 100), 180);
-	private static int counter = 0;
+	private static int counter = 0; 
 	private Image background;
 	private ArrayList<PlayerBullet> bullets;
 	private boolean canShoot;
@@ -37,7 +40,7 @@ class Abb extends Game {
 
 		//loads background
 		try {
-			background = ImageIO.read(new File("background.gif"));
+			background = ImageIO.read(new File("background.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,6 +55,7 @@ class Abb extends Game {
 		enemies = new ArrayList<Enemy>();
 		//enemies.add(new TestDummy(new Point(width/2, height/2), 0));
 		enemies.add(new MrGuy(new Point(width - 100, height - 100), 0));
+		enemies.add(new Turret(new Point(width/2, height/2)));
 	}
 
 	public void level() {
@@ -92,10 +96,12 @@ class Abb extends Game {
 		//enemy draw move
 		brush.setColor(Color.RED);
 		for (Enemy e: enemies) {
-			e.attack(p.position);
+			e.attack(p, brush);
 			e.move(p.position);
 			e.paint(brush);
 		}
+		
+		
 		
 		//enemy hit detection
 		brush.setColor(Color.RED);
@@ -110,10 +116,7 @@ class Abb extends Game {
 				}
 			}
 		}
-		
-		//player hit detections
-		
-		
+				
 		//game over?
 		if (p.getHealth() <= 0) {
 			brush.setColor(Color.RED);
@@ -121,7 +124,7 @@ class Abb extends Game {
 		}
 
 		//number display
-		brush.setColor(Color.BLACK);
+		brush.setColor(Color.RED);
 		brush.drawString("Counter: " + counter, 10, 40);
 		brush.drawString("Bullets: " + bullets.size(), 10, 55);
 		brush.drawString("BulletTimer: " + bulletTimer, 10, 70);
