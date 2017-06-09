@@ -17,11 +17,11 @@ public class MrGuy extends Polygon implements Enemy {
 	private double angle;
 	private int attack = 0;
 	
-	private int health = 500;
+	private int health = 50;
 	private int moveSpeed = 2;
 
-	public MrGuy(Point inPosition, double inRotation) {
-		super(hitBox, inPosition, inRotation);
+	public MrGuy(Point inPosition) {
+		super(hitBox, inPosition, 0);
 		try {
 			guy = ImageIO.read(new File("guyLeft.png"));
 		} catch (IOException e) {

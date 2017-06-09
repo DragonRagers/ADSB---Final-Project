@@ -53,11 +53,16 @@ class Abb extends Game {
 		//enemy testing
 		enemies = new ArrayList<Enemy>();
 		//enemies.add(new TestDummy(new Point(width/2, height/2), 0));
-		enemies.add(new MrGuy(new Point(width - 100, height - 100), 0));
+		enemies.add(new MrGuy(new Point(100,100)));
+		enemies.add(new MrGuy(new Point(width - 100, height - 100)));
+		enemies.add(new MrGuy(new Point(width - 100, 100)));
+		enemies.add(new MrGuy(new Point(100, height - 100)));
+		/**
 		enemies.add(new Turret(new Point(100,100)));
 		enemies.add(new Turret(new Point(width - 100, height - 100)));
 		enemies.add(new Turret(new Point(width - 100, 100)));
 		enemies.add(new Turret(new Point(100, height - 100)));
+		**/
 	}
 
 	public void level() {
@@ -86,6 +91,8 @@ class Abb extends Game {
 			canShoot = true;
 		}
 		brush.setColor(Color.GREEN);
+		
+		//bullet outta range
 		for(int c = 0; c < bullets.size(); c++){
 			PlayerBullet b = bullets.get(c);
 			b.move();
@@ -94,7 +101,7 @@ class Abb extends Game {
 				bullets.remove(c);
 			}
 		}
-
+	
 		//enemy draw move
 		brush.setColor(Color.RED);
 		for (Enemy e: enemies) {
@@ -103,12 +110,10 @@ class Abb extends Game {
 			e.paint(brush);
 		}
 
- 
-
 		//enemy hit detection
-		brush.setColor(Color.RED);
-		for (int b = 0; b < bullets.size(); b++) {
-			for (int e = 0; e < enemies.size(); e++) {
+		
+		for (int e = 0; e < enemies.size(); e++) {
+			for (int b = 0; b < bullets.size(); b++) {
 				if (enemies.get(e).contains(bullets.get(b).position())) {
 					bullets.remove(b);
 					enemies.get(e).hit(p.bulletDmg);
@@ -130,7 +135,7 @@ class Abb extends Game {
 				}
 			}
 		}
-		
+			
 		//game over?
 		if (p.getHealth() <= 0) {
 			brush.setColor(Color.RED);

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class Turret extends Polygon implements Enemy{
-	private static int health = 3;
+	private int health = 30;
 	private double angle;
 	private static Point[] hitBox = {
 			new Point(0,0),
@@ -34,8 +34,8 @@ public class Turret extends Polygon implements Enemy{
 	public void paint(Graphics brush) {
 		//super.paint(brush);
 		brush.drawImage(turret, (int) position.x - 30, (int) position.y, 90, 50, null);
-		//brush.drawString("HP: " + health, (int) position.x - 10, (int) position.y - 15);
-		//brush.drawString("MrGuy", (int) position.x - 5, (int) position.y - 30);
+		brush.drawString("HP: " + health, (int) position.x - 10, (int) position.y - 5);
+		brush.drawString("Turret", (int) position.x - 5, (int) position.y - 20);
 		//brush.draw3DRect((int) position.x - 5, (int) position.y - 5, 60, 60);
 	}
 	
