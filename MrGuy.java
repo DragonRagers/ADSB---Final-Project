@@ -8,10 +8,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class MrGuy extends Polygon implements Enemy {
-	private static Point[] hitBox = {new Point(-40,-40),
-			new Point(-20, 20),
-			new Point(20,20),
-			new Point(20, -20)};
+	private static Point[] hitBox = {new Point(-25,-25),
+			new Point(-25, 25),
+			new Point(25,25),
+			new Point(25, -25)};
 	private Image guy;
 	private int charge = 0;
 	private double angle;
@@ -32,6 +32,7 @@ public class MrGuy extends Polygon implements Enemy {
 
 
 	public void paint(Graphics brush) {
+		//super.paint(brush);
 		brush.drawImage(guy, (int) position.x - 10, (int) position.y - 10, 50, 50, null);
 		brush.drawString("HP: " + health, (int) position.x - 10, (int) position.y - 15);
 		brush.drawString("MrGuy", (int) position.x - 5, (int) position.y - 30);
@@ -82,7 +83,7 @@ public class MrGuy extends Polygon implements Enemy {
 	public void attack(Player p, Graphics brush) {
 		double distance = Math.sqrt(Math.pow(p.position.x - position.x, 2) + Math.pow(p.position.y - position.y, 2));
 		if (distance <= 200 && charge == 0) {
-			moveSpeed = 7;
+			moveSpeed = 9;
 			charge++;
 		}
 		if (charge > 0) {

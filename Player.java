@@ -21,6 +21,7 @@ public class Player extends Polygon implements KeyListener{
 	private boolean sRight = false;
 	private boolean sLeft = false;
 	private boolean sDown = false;
+	public int bulletDmg = 10;
 	ArrayList<PlayerBullet> bullets = new ArrayList<>();
 
 	private int health = 6;
@@ -197,6 +198,7 @@ public class Player extends Polygon implements KeyListener{
 	}
 
 	public void paint (Graphics brush){
+		//super.paint(brush);
 		brush.drawImage(character, (int) position.x - 20, (int) position.y - 25, 100, 100, null);
 	}
 

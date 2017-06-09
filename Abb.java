@@ -10,26 +10,25 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 class Abb extends Game {
-	private Point[] playerPoints = {
-			new Point(-40,-40),
-			new Point(-40, 40),
-			new Point(40,40),
-			new Point(40, -40)
+	private Point[] playerPoints = {new Point(-30,-30),
+			new Point(-30, 30),
+			new Point(30,30),
+			new Point(30, -30)
 	};
-	
+
+
 	private static final int height = 720;
 	private static final int width = 1280;
-	private Player p = new Player(playerPoints, new Point(100, 100), 180);
+	private Player p = new Player(playerPoints, new Point(width/2- 10 , height/2 - 10), 180);
 	private static int counter = 0; 
 	private Image background;
 	private ArrayList<PlayerBullet> bullets;
 	private boolean canShoot;
 	private int bulletTimer;
 	private ArrayList<Enemy> enemies;
-	
+
 	//changeable things
 	static final int attackspeed = 10;
-	static int bulletDmg = 10;
 
 	public Abb() {
 		//construct things
@@ -45,17 +44,20 @@ class Abb extends Game {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		//preps variables
 		bullets = p.getBullets();
 		canShoot = true;
 		bulletTimer = 0;
-		
+
 		//enemy testing
 		enemies = new ArrayList<Enemy>();
 		//enemies.add(new TestDummy(new Point(width/2, height/2), 0));
 		enemies.add(new MrGuy(new Point(width - 100, height - 100), 0));
-		enemies.add(new Turret(new Point(width/2, height/2)));
+		enemies.add(new Turret(new Point(100,100)));
+		enemies.add(new Turret(new Point(width - 100, height - 100)));
+		enemies.add(new Turret(new Point(width - 100, 100)));
+		enemies.add(new Turret(new Point(100, height - 100)));
 	}
 
 	public void level() {
@@ -100,23 +102,35 @@ class Abb extends Game {
 			e.move(p.position);
 			e.paint(brush);
 		}
-		
-		
-		
+
+ 
+
 		//enemy hit detection
 		brush.setColor(Color.RED);
 		for (int b = 0; b < bullets.size(); b++) {
 			for (int e = 0; e < enemies.size(); e++) {
 				if (enemies.get(e).contains(bullets.get(b).position())) {
 					bullets.remove(b);
-					enemies.get(e).hit(bulletDmg);
+					enemies.get(e).hit(p.bulletDmg);
 					if (enemies.get(e).getHealth() <= 0) {
 						enemies.remove(e);
 					}
 				}
 			}
 		}
-				
+
+		//le player hit
+		for (int e = 0; e < enemies.size(); e++) {
+			if (enemies.get(e) instanceof Turret) {
+				for (int c = 0; c < ((Turret) enemies.get(e)).getBullets().size(); c++) {
+					if (p.contains(((Turret) enemies.get(e)).getBullets().get(c).position)) {
+						((Turret) enemies.get(e)).getBullets().remove(c);
+						p.damage(1);
+					}
+				}
+			}
+		}
+		
 		//game over?
 		if (p.getHealth() <= 0) {
 			brush.setColor(Color.RED);

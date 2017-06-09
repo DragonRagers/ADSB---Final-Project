@@ -13,10 +13,9 @@ public class Turret extends Polygon implements Enemy{
 	private double angle;
 	private static Point[] hitBox = {
 			new Point(0,0),
-			new Point(0,2),
-			new Point(2,2),
-			new Point(2,0)
-			
+			new Point(0,60),
+			new Point(80,60),
+			new Point(80,0)
 	};
 	private Image turret;
 	private ArrayList<TurretBullet> bullets = new ArrayList<TurretBullet>(); 
@@ -33,7 +32,8 @@ public class Turret extends Polygon implements Enemy{
 	}
 
 	public void paint(Graphics brush) {
-		brush.drawImage(turret, (int) position.x - 45, (int) position.y - 10, 90, 50, null);
+		//super.paint(brush);
+		brush.drawImage(turret, (int) position.x - 30, (int) position.y, 90, 50, null);
 		//brush.drawString("HP: " + health, (int) position.x - 10, (int) position.y - 15);
 		//brush.drawString("MrGuy", (int) position.x - 5, (int) position.y - 30);
 		//brush.draw3DRect((int) position.x - 5, (int) position.y - 5, 60, 60);
@@ -79,4 +79,8 @@ public class Turret extends Polygon implements Enemy{
 		return health;
 	}
 
+	public ArrayList<TurretBullet> getBullets() {
+		return bullets;
+		
+	}
 }

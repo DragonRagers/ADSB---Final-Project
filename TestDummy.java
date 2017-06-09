@@ -10,10 +10,10 @@ import javax.imageio.ImageIO;
 
 public class TestDummy extends Polygon implements Enemy{
 	private int health = 999;
-	private static Point[] hitBox = {new Point(-40,-40),
-			new Point(-40, 40),
-			new Point(40,40),
-			new Point(40, -40)};
+	private static Point[] hitBox = {new Point(-30,-30),
+			new Point(-30, 30),
+			new Point(30,30),
+			new Point(30, -30)};
 	private Image dummy;
 	
 	public TestDummy(Point inPosition, double inRotation) {
@@ -26,6 +26,7 @@ public class TestDummy extends Polygon implements Enemy{
 	}
 
 	public void paint(Graphics brush) {
+		//super.paint(brush);
 		brush.drawImage(dummy, (int) position.x - 20, (int) position.y - 25, 100, 100, null);
 		//brush.drawRect((int) position.x - 25, (int) position.y - 25, 80, 80);
 		brush.drawString("HP: " + health, (int) position.x - 10, (int) position.y - 30);
