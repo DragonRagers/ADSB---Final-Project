@@ -1,4 +1,4 @@
-package adsb.finalproject.bdgub.bdcon;
+package net.mrpaul.MB190.finalProject;
 
 
 
@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -133,7 +134,7 @@ class Abb extends Game {
 		//game over?
 		if (p.getHealth() <= 0) {
 			brush.setColor(Color.RED);
-			brush.drawString("Ay its game over noob", width/2 - 50, height/2);
+			brush.drawString("Ay its game over noob", width/2 - 50, height/2 - 300);
 		}
 
 		//number display
@@ -152,15 +153,24 @@ class Abb extends Game {
 		if (enemies.isEmpty()) {
 			level();
 		}
+		
+		if (p.getHealth() < 0) {
+			try {
+				TimeUnit.SECONDS.sleep(3);
+			} catch (InterruptedException e) {
+			}
+			System.exit(0);
+		}
 	}
 	
 	public void level() {
+		//this 2D array is where you can design what level is procedurally generated, 0 = nothing, 1 = TestDummy, 2 = MrGuy, 3 = Turret
 		int[][] toLoad = {
-				{2,0,0,0,0,0,2},	
-				{2,0,0,0,0,0,2},
-				{2,0,0,0,0,0,2},
-				{2,0,0,0,0,0,2},
-				{2,0,0,0,0,0,2},
+				{0,0,0,0,0,0,0},	
+				{0,2,0,0,0,3,0},
+				{0,0,0,0,0,0,0},
+				{0,3,0,0,0,2,0},
+				{0,0,0,1,0,0,0},
 		};
 		enemies.clear();
 		

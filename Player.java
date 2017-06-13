@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -23,7 +24,6 @@ public class Player extends Polygon implements KeyListener{
 	private boolean sDown = false;
 	public int bulletDmg = 10;
 	ArrayList<PlayerBullet> bullets = new ArrayList<>();
-
 	private int health = 6;
 	private Image character;
 
@@ -35,6 +35,7 @@ public class Player extends Polygon implements KeyListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 
@@ -198,9 +199,16 @@ public class Player extends Polygon implements KeyListener{
 	}
 
 	public void paint (Graphics brush){
+		if (health <= 0) {
+			try {
+				character = ImageIO.read(new File("boom.png"));
+			} catch (IOException e) {
+			}
+		}
 		//super.paint(brush);
 		brush.drawImage(character, (int) position.x - 20, (int) position.y - 25, 100, 100, null);
 	}
+		
 
 	public void damage(int dmg) {
 		health -= dmg;

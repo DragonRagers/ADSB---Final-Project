@@ -16,7 +16,7 @@ public class MrGuy extends Polygon implements Enemy {
 	private int charge = 0;
 	private double angle;
 	private int attack = 0;
-	
+
 	private int health = 50;
 	private int moveSpeed = 2;
 
@@ -32,11 +32,11 @@ public class MrGuy extends Polygon implements Enemy {
 
 
 	public void paint(Graphics brush) {
-		//super.paint(brush);
-		brush.drawImage(guy, (int) position.x - 10, (int) position.y - 10, 50, 50, null);
-		brush.drawString("HP: " + health, (int) position.x - 10, (int) position.y - 15);
-		brush.drawString("MrGuy", (int) position.x - 5, (int) position.y - 30);
-		//brush.draw3DRect((int) position.x - 5, (int) position.y - 5, 60, 60);
+			//super.paint(brush);
+			brush.drawImage(guy, (int) position.x - 10, (int) position.y - 10, 50, 50, null);
+			brush.drawString("HP: " + health, (int) position.x - 10, (int) position.y - 15);
+			brush.drawString("MrGuy", (int) position.x - 5, (int) position.y - 30);
+			//brush.draw3DRect((int) position.x - 5, (int) position.y - 5, 60, 60);
 	}
 
 	public void move(Point PlayerPoint) {
@@ -95,7 +95,7 @@ public class MrGuy extends Polygon implements Enemy {
 		if (charge == 100) {
 			charge = 0;
 		}
-		
+
 		if (attack == 0 && p.contains(position)) {
 			p.damage(1);
 			attack = 1;
