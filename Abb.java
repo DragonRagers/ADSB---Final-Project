@@ -1,4 +1,5 @@
-package net.mrpaul.MB190.finalProject;
+package adsb.finalproject.bdgub.bdcon;
+
 
 
 import java.awt.*;
@@ -113,15 +114,21 @@ class Abb extends Game {
 		//enemy hit detection
 		for (int e = 0; e < enemies.size(); e++) {
 			for (int b = 0; b < bullets.size(); b++) {
+				if(enemies.size() == 0)
+					break;
+				if(e < 0)
+					e = 0;
 				if (enemies.get(e).contains(bullets.get(b).position())) {
 					bullets.remove(b);
 					enemies.get(e).hit(p.bulletDmg);
 					if (enemies.get(e).getHealth() <= 0) {
 						enemies.remove(e);	
 					}
+					e--;
 				}
 			}
 		}
+		
 
 		//le player hit
 		//turret bullet hit
