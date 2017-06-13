@@ -58,11 +58,6 @@ class Abb extends Game {
 		level();
 	}
 
-	public void level() {
-
-	}
-
-
 	public void paint(Graphics brush) {		
 		//background
 		brush.drawImage(background, 0, 0, 1280, 720, null);
