@@ -40,7 +40,7 @@ public class MrGuy extends Polygon implements Enemy {
 	}
 
 	public void move(Point PlayerPoint) {
-		System.out.println(charge);
+		//System.out.println(charge);
 		if (moveSpeed == 2) {
 			angle = Math.atan2(PlayerPoint.y - position.y, PlayerPoint.x - position.x);
 		}

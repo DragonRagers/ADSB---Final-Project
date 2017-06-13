@@ -7,7 +7,7 @@ public class PlayerBullet extends Player{
 	private boolean dRight = false;
 	private boolean dUp = false;
 	private boolean dDown = false;
-	private int stepSize = 6;
+	private int speed = 8;
 	
 	static Point[] bulletShape = {
 			new Point(0,0),
@@ -26,32 +26,32 @@ public class PlayerBullet extends Player{
 	
 	public void move() {
 		if (dUp && dRight) {
-			position.x+=stepSize * Math.sqrt(2) / 2;
-			position.y-=stepSize * Math.sqrt(2) / 2;
+			position.x+=speed * Math.sqrt(2) / 2;
+			position.y-=speed * Math.sqrt(2) / 2;
 		} 
 		else if (dUp && dLeft){
-			position.x-=stepSize * Math.sqrt(2) / 2;
-			position.y-=stepSize * Math.sqrt(2) / 2;
+			position.x-=speed * Math.sqrt(2) / 2;
+			position.y-=speed * Math.sqrt(2) / 2;
 		}
 		else if (dDown && dLeft){
-			position.x-=stepSize * Math.sqrt(2) / 2;
-			position.y+=stepSize * Math.sqrt(2) / 2;
+			position.x-=speed * Math.sqrt(2) / 2;
+			position.y+=speed * Math.sqrt(2) / 2;
 		}
 		else if (dDown && dRight){
-			position.x+=stepSize * Math.sqrt(2) / 2;
-			position.y+=stepSize * Math.sqrt(2) / 2;
+			position.x+=speed * Math.sqrt(2) / 2;
+			position.y+=speed * Math.sqrt(2) / 2;
 		}
 		else if (dUp){
-			position.y-=stepSize;
+			position.y-=speed;
 		}
 		else if (dRight){
-			position.x+=stepSize;
+			position.x+=speed;
 		}
 		else if (dLeft){
-			position.x-=stepSize;
+			position.x-=speed;
 		}
 		else if(dDown){
-			position.y+=stepSize;
+			position.y+=speed;
 		}
 	}
 	public void paint (Graphics brush){

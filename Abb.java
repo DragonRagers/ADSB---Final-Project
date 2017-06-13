@@ -28,7 +28,7 @@ class Abb extends Game {
 	private ArrayList<Enemy> enemies;
 
 	//changeable things
-	static final int attackspeed = 10;
+	static final int attackspeed = 10; //inversely speeds up
 
 	public Abb() {
 		//construct things
@@ -44,7 +44,7 @@ class Abb extends Game {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		//preps variables
 		bullets = p.getBullets();
 		canShoot = true;
@@ -57,12 +57,12 @@ class Abb extends Game {
 		enemies.add(new MrGuy(new Point(width - 100, height - 100)));
 		enemies.add(new MrGuy(new Point(width - 100, 100)));
 		enemies.add(new MrGuy(new Point(100, height - 100)));
-		/**
+
 		enemies.add(new Turret(new Point(100,100)));
 		enemies.add(new Turret(new Point(width - 100, height - 100)));
 		enemies.add(new Turret(new Point(width - 100, 100)));
 		enemies.add(new Turret(new Point(100, height - 100)));
-		**/
+
 	}
 
 	public void level() {
@@ -91,7 +91,7 @@ class Abb extends Game {
 			canShoot = true;
 		}
 		brush.setColor(Color.GREEN);
-		
+
 		//bullet outta range
 		for(int c = 0; c < bullets.size(); c++){
 			PlayerBullet b = bullets.get(c);
@@ -101,7 +101,7 @@ class Abb extends Game {
 				bullets.remove(c);
 			}
 		}
-	
+
 		//enemy draw move
 		brush.setColor(Color.RED);
 		for (Enemy e: enemies) {
@@ -111,20 +111,20 @@ class Abb extends Game {
 		}
 
 		//enemy hit detection
-		
 		for (int e = 0; e < enemies.size(); e++) {
 			for (int b = 0; b < bullets.size(); b++) {
 				if (enemies.get(e).contains(bullets.get(b).position())) {
 					bullets.remove(b);
 					enemies.get(e).hit(p.bulletDmg);
 					if (enemies.get(e).getHealth() <= 0) {
-						enemies.remove(e);
+						enemies.remove(e);	
 					}
 				}
 			}
 		}
 
 		//le player hit
+		//turret bullet hit
 		for (int e = 0; e < enemies.size(); e++) {
 			if (enemies.get(e) instanceof Turret) {
 				for (int c = 0; c < ((Turret) enemies.get(e)).getBullets().size(); c++) {
@@ -135,7 +135,7 @@ class Abb extends Game {
 				}
 			}
 		}
-			
+
 		//game over?
 		if (p.getHealth() <= 0) {
 			brush.setColor(Color.RED);
@@ -155,6 +155,17 @@ class Abb extends Game {
 
 		counter++;
 
+		if (enemies.isEmpty()) {
+			enemies.add(new MrGuy(new Point(100,100)));
+			enemies.add(new MrGuy(new Point(width - 100, height - 100)));
+			enemies.add(new MrGuy(new Point(width - 100, 100)));
+			enemies.add(new MrGuy(new Point(100, height - 100)));
+
+			enemies.add(new Turret(new Point(100,100)));
+			enemies.add(new Turret(new Point(width - 100, height - 100)));
+			enemies.add(new Turret(new Point(width - 100, 100)));
+			enemies.add(new Turret(new Point(100, height - 100)));
+		}
 	}
 
 	public static void main (String[] args) {
