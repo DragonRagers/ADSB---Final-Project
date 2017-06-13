@@ -54,16 +54,8 @@ class Abb extends Game {
 		//enemy testing
 		enemies = new ArrayList<Enemy>();
 		//enemies.add(new TestDummy(new Point(width/2, height/2), 0));
-		enemies.add(new MrGuy(new Point(100,100)));
-		enemies.add(new MrGuy(new Point(width - 100, height - 100)));
-		enemies.add(new MrGuy(new Point(width - 100, 100)));
-		enemies.add(new MrGuy(new Point(100, height - 100)));
-
-		enemies.add(new Turret(new Point(100,100)));
-		enemies.add(new Turret(new Point(width - 100, height - 100)));
-		enemies.add(new Turret(new Point(width - 100, 100)));
-		enemies.add(new Turret(new Point(100, height - 100)));
-
+		
+		level();
 	}
 
 	public void level() {
@@ -163,18 +155,34 @@ class Abb extends Game {
 		counter++;
 
 		if (enemies.isEmpty()) {
-			enemies.add(new MrGuy(new Point(100,100)));
-			enemies.add(new MrGuy(new Point(width - 100, height - 100)));
-			enemies.add(new MrGuy(new Point(width - 100, 100)));
-			enemies.add(new MrGuy(new Point(100, height - 100)));
-
-			enemies.add(new Turret(new Point(100,100)));
-			enemies.add(new Turret(new Point(width - 100, height - 100)));
-			enemies.add(new Turret(new Point(width - 100, 100)));
-			enemies.add(new Turret(new Point(100, height - 100)));
+			level();
 		}
 	}
-
+	
+	public void level() {
+		int[][] toLoad = {
+				{2,0,0,0,0,0,2},	
+				{2,0,0,0,0,0,2},
+				{2,0,0,0,0,0,2},
+				{2,0,0,0,0,0,2},
+				{2,0,0,0,0,0,2},
+		};
+		enemies.clear();
+		
+		for (int r = 0; r < toLoad.length; r++) {
+			for (int c = 0; c < toLoad[0].length; c++) {
+				if (toLoad[r][c]  == 1) {
+					enemies.add(new TestDummy(new Point(width/toLoad[0].length * c, height/toLoad.length * r), 0));
+				} else if (toLoad[r][c]  == 2) {
+					enemies.add(new MrGuy(new Point(width/toLoad[0].length * c, height/toLoad.length * r)));
+				} else if (toLoad[r][c]  == 3) {
+					enemies.add(new Turret(new Point(width/toLoad[0].length * c, height/toLoad.length * r)));
+				}
+			}
+		}
+		
+	}
+	
 	public static void main (String[] args) {
 		Abb a = new Abb();
 		a.repaint();
