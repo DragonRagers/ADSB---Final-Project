@@ -55,15 +55,8 @@ class Abb extends Game {
 		//enemy testing
 		enemies = new ArrayList<Enemy>();
 		//enemies.add(new TestDummy(new Point(width/2, height/2), 0));
-		enemies.add(new MrGuy(new Point(100,100)));
-		enemies.add(new MrGuy(new Point(width - 100, height - 100)));
-		enemies.add(new MrGuy(new Point(width - 100, 100)));
-		enemies.add(new MrGuy(new Point(100, height - 100)));
-
-		enemies.add(new Turret(new Point(100,100)));
-		enemies.add(new Turret(new Point(width - 100, height - 100)));
-		enemies.add(new Turret(new Point(width - 100, 100)));
-		enemies.add(new Turret(new Point(100, height - 100)));
+		
+		level();
 
 	}
 

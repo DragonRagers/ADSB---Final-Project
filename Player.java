@@ -1,5 +1,6 @@
 package net.mrpaul.MB190.finalProject;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -206,7 +207,10 @@ public class Player extends Polygon implements KeyListener{
 			}
 		}
 		//super.paint(brush);
+		brush.setColor(Color.RED);
 		brush.drawImage(character, (int) position.x - 20, (int) position.y - 25, 100, 100, null);
+		brush.drawString("HP: " + health, (int) position.x, (int) position.y - 20);
+		brush.drawString("You", (int) position.x + 5, (int) position.y - 35);
 	}
 		
 
