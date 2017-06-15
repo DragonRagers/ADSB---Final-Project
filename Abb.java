@@ -1,4 +1,4 @@
-package net.mrpaul.MB190.finalProject;
+package adsb.finalproject.bdgub.bdcon;
 
 
 
@@ -7,7 +7,6 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -55,9 +54,22 @@ class Abb extends Game {
 		//enemy testing
 		enemies = new ArrayList<Enemy>();
 		//enemies.add(new TestDummy(new Point(width/2, height/2), 0));
-		
-		level();
+		enemies.add(new MrGuy(new Point(100,100)));
+		enemies.add(new MrGuy(new Point(width - 100, height - 100)));
+		enemies.add(new MrGuy(new Point(width - 100, 100)));
+		enemies.add(new MrGuy(new Point(100, height - 100)));
+
+		enemies.add(new Turret(new Point(100,100)));
+		enemies.add(new Turret(new Point(width - 100, height - 100)));
+		enemies.add(new Turret(new Point(width - 100, 100)));
+		enemies.add(new Turret(new Point(100, height - 100)));
+
 	}
+
+	public void level() {
+
+	}
+
 
 	public void paint(Graphics brush) {		
 		//background
@@ -134,7 +146,7 @@ class Abb extends Game {
 		//game over?
 		if (p.getHealth() <= 0) {
 			brush.setColor(Color.RED);
-			brush.drawString("Ay its game over noob", width/2 - 50, height/2 - 300);
+			brush.drawString("Ay its game over noob", width/2 - 50, height/2);
 		}
 
 		//number display
@@ -151,43 +163,18 @@ class Abb extends Game {
 		counter++;
 
 		if (enemies.isEmpty()) {
-			level();
-		}
-		
-		if (p.getHealth() < 0) {
-			try {
-				TimeUnit.SECONDS.sleep(3);
-			} catch (InterruptedException e) {
-			}
-			System.exit(0);
+			enemies.add(new MrGuy(new Point(100,100)));
+			enemies.add(new MrGuy(new Point(width - 100, height - 100)));
+			enemies.add(new MrGuy(new Point(width - 100, 100)));
+			enemies.add(new MrGuy(new Point(100, height - 100)));
+
+			enemies.add(new Turret(new Point(100,100)));
+			enemies.add(new Turret(new Point(width - 100, height - 100)));
+			enemies.add(new Turret(new Point(width - 100, 100)));
+			enemies.add(new Turret(new Point(100, height - 100)));
 		}
 	}
-	
-	public void level() {
-		//this 2D array is where you can design what level is procedurally generated, 0 = nothing, 1 = TestDummy, 2 = MrGuy, 3 = Turret
-		int[][] toLoad = {
-				{0,0,0,0,0,0,0},	
-				{0,2,0,0,0,3,0},
-				{0,0,0,0,0,0,0},
-				{0,3,0,0,0,2,0},
-				{0,0,0,1,0,0,0},
-		};
-		enemies.clear();
-		
-		for (int r = 0; r < toLoad.length; r++) {
-			for (int c = 0; c < toLoad[0].length; c++) {
-				if (toLoad[r][c]  == 1) {
-					enemies.add(new TestDummy(new Point(width/toLoad[0].length * c, height/toLoad.length * r), 0));
-				} else if (toLoad[r][c]  == 2) {
-					enemies.add(new MrGuy(new Point(width/toLoad[0].length * c, height/toLoad.length * r)));
-				} else if (toLoad[r][c]  == 3) {
-					enemies.add(new Turret(new Point(width/toLoad[0].length * c, height/toLoad.length * r)));
-				}
-			}
-		}
-		
-	}
-	
+
 	public static void main (String[] args) {
 		Abb a = new Abb();
 		a.repaint();
