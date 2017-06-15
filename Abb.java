@@ -1,4 +1,4 @@
-package adsb.finalproject.bdgub.bdcon;
+package net.mrpaul.MB190.finalProject;
 
 
 
@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -65,11 +66,6 @@ class Abb extends Game {
 		enemies.add(new Turret(new Point(100, height - 100)));
 
 	}
-
-	public void level() {
-
-	}
-
 
 	public void paint(Graphics brush) {		
 		//background
