@@ -9,6 +9,9 @@ Press the run button
 What it Does
 You play as a marine invading a base called blitz. The inhabitants of the base don’t like you and want to kill you. They compose of turrets and charging wraiths (named MrGuy) that will try to take you down (there’s also a TestDummy but he’s nice). Defend yourself, shoot them down! Upon completing the room (destroying all the enemies), the same room loads. We did not have enough time to implement other levels.
  
+ Project Proposal (Back log at the end):
+ https://docs.google.com/presentation/d/1Mo94H4gqdKICzvqvEteGvoxfaAYAhxrI8k0AI_BV2i4/edit?usp=sharing
+ 
 Inputs
 WASD - Movement
 W - Up
