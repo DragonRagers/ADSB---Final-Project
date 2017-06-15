@@ -19,3 +19,4 @@ Arrow Keys - Shoot bullets in target direction (holding two at the same time wil
  
 Output
 A window will open upon running the program which should show the player’s character and a few enemies.
+When you lose (health reaches 0), you're character will blow up and the console will close.
